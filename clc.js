@@ -112,22 +112,31 @@ clear.addEventListener("click", ()=>{
     expression.textContent = "";
     current.textContent = "";
 })
+document.addEventListener("keydown", (event) => {
+    let key = event.key;
 
-const backspace = document.getElementById("backspace")
-backspace.addEventListener("click", ()=>{
-    if (resultShown){
+    if (key === "Backspace") {
+        document.getElementById("backspace").click();
         return;
     }
-    else{
-        currentValue= currentValue.slice(0,-1)
-        current.textContent = currentValue
+    if (key === "Escape") {
+        document.getElementById("clear").click();
+        return;
     }
-    
-})
 
-document.addEventListener("keydown" , (event)=>{
-    const button = document.querySelector(`[data-digit="${event.key}"]`)
-    if (button){
+    if (key === "Enter") {
+        key = "=";
+        event.preventDefault();
+    }
+    if (key === "/") {
+        event.preventDefault();
+    }
+
+    const button =
+        document.querySelector(`[data-digit="${key}"]`) ||
+        document.querySelector(`[data-operator="${key}"]`);
+
+    if (button) {
         button.click();
     }
-})
+});
