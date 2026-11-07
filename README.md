@@ -4,7 +4,7 @@
 An on-screen calculator built with HTML, CSS, and vanilla JavaScript. It is the final project of the Foundations course in [The Odin Project](https://www.theodinproject.com/).
 
 ## Live demo
-[view the site]()
+[view the site](https://rezuana24-git.github.io/Calculator/)
 ## Features
 
 - Basic operations: add, subtract, multiply, divide, and power (`x^`)
