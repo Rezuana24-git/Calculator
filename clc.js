@@ -123,5 +123,11 @@ backspace.addEventListener("click", ()=>{
         current.textContent = currentValue
     }
     
+})
 
+document.addEventListener("keydown" , (event)=>{
+    const button = document.querySelector(`[data-digit="${event.key}"]`)
+    if (button){
+        button.click();
+    }
 })
