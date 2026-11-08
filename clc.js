@@ -38,6 +38,7 @@ const digits= document.querySelectorAll("[data-digit]");
 let current = document.getElementById('current')
 let expression = document.getElementById('expression')
 let currentValue= "";
+let resultShown = false;
 digits.forEach((e)=>{
     e.addEventListener("click", (event)=>{
         if (resultShown){
@@ -58,11 +59,14 @@ digits.forEach((e)=>{
     
     })
 })
-let resultShown = false
+
 const buttons = document.querySelectorAll("[data-operator]")
 buttons.forEach((e)=>{
     e.addEventListener("click", (event)=>{
         if (event.target.dataset.operator == "="){
+            if (resultShown && currentValue != ""){
+                return;
+            }
             if ((operator === "/") && (currentValue == 0) && (currentValue != "")){
                 current.textContent = "Divided by zero error"
                 firstNumber= ""
@@ -89,6 +93,7 @@ buttons.forEach((e)=>{
         }
         
         else{
+            resultShown = false
             if(firstNumber&&currentValue&&operator){
                 firstNumber= operate(operator , Number(firstNumber), Number(currentValue))
                 current.textContent = firstNumber
@@ -105,13 +110,28 @@ buttons.forEach((e)=>{
 
 const clear = document.getElementById("clear")
 clear.addEventListener("click", ()=>{
-    firstNumber=0;
-    lastNumber=0;
+    firstNumber="";
+    lastNumber="";
     currentValue="";
     operator="";
+    resultShown = false;
     expression.textContent = "";
     current.textContent = "";
 })
+
+const backspace = document.getElementById("backspace")
+backspace.addEventListener("click", ()=>{
+    if (resultShown){
+        return;
+    }
+    else{
+        currentValue= currentValue.slice(0,-1)
+        current.textContent = currentValue
+    }
+    
+
+})
+
 document.addEventListener("keydown", (event) => {
     let key = event.key;
 
